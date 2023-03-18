@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 export const ShadowBox = styled.div`
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${({ theme }) => theme.elements};
   padding: 12px 20px;
   border-radius: 5px;
   display: flex;
@@ -11,9 +11,9 @@ export const ShadowBox = styled.div`
 `;
 
 export const SearchButton = styled.button`
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${({ theme }) => theme.elements};
   border: none;
-  color: hsl(0, 0%, 100%);
+  color: ${({ theme }) => theme.text};
   cursor: pointer;
   margin-right: 15px;
 
@@ -23,15 +23,14 @@ export const SearchButton = styled.button`
 `;
 
 const TextInput = styled.input`
-  background-color: hsl(209, 23%, 22%);
+  background-color: ${({ theme }) => theme.elements};
   border: none;
-  color: hsl(0, 0%, 100%);
   text-decoration: none;
   outline: none;
   width: 400px;
 
-  ::placeholder{
-    color: hsl(0, 0%, 100%);
+  ::placeholder {
+    color: ${({ theme }) => theme.text};
   }
 `;
 

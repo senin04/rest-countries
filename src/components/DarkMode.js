@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { useTheme } from "styled-components";
 
 
 const Button = styled.button`
   font-weight: 600;
   background-color: transparent;
   border: none;
-  color: hsl(0, 0%, 100%);
+  color: ${({ theme }) => theme.text};
   cursor: pointer;
 `;
 
@@ -19,11 +20,14 @@ const Container = styled.div`
   }
 `;
 
-const DarkMode = () => {
+const DarkMode = ({themeToggler}) => {
+  const theme = useTheme()
   return (
+    
     <Container>
-      <ion-icon name="moon"></ion-icon>
-      <Button>Dark Mode</Button>
+      <ion-icon name={theme.moon}></ion-icon>
+      <Button onClick={themeToggler}>Dark Mode</Button>
+      
     </Container>
   );
 };

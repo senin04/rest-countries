@@ -1,29 +1,32 @@
 import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
 import Body from "./components/Body";
 import Header from "./components/Header";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./components/GlobalStyles";
+import { lightTheme, darkTheme } from "./components/Themes";
+import { useState } from "react";
 
-const Global = createGlobalStyle`
-  body {
-    font-family: 'Nunito Sans', sans-serif;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
-`;
 
 const Container = styled.div`
-  background-color: hsl(207, 26%, 17%);
-  color: hsl(0, 0%, 100%);
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
 `;
 
 function App() {
+  const [theme, setTheme] = useState("light");
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
   return (
-    <Container>
-      <Global />
-      <Header />
-      <Body />
-    </Container>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <>
+        <GlobalStyles />
+        <Container>
+          <Header themeToggler={themeToggler} />
+          <Body />
+        </Container>
+      </>
+    </ThemeProvider>
   );
 }
 
