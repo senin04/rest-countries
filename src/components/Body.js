@@ -6,13 +6,14 @@ import Countries from "./Countries";
 
 const StyledContainer = styled.div`
   margin: 0 100px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledTopContainer = styled.div`
   margin: 40px 0;
   display: flex;
   justify-content: space-between;
-
 `;
 
 const Body = () => {

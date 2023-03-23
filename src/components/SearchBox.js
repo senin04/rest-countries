@@ -8,6 +8,7 @@ export const ShadowBox = styled.div`
   border-radius: 5px;
   display: flex;
   align-items: center;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const SearchButton = styled.button`

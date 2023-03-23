@@ -11,7 +11,6 @@ const Text = styled.div`
 const Arrow = styled.button`
   background-color: ${({ theme }) => theme.elements};
   border: none;
-  /* color: hsl(0, 0%, 100%); */
   cursor: pointer;
   padding: 0;
 
