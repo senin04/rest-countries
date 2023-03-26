@@ -2,33 +2,38 @@ import React from "react";
 import styled from "styled-components";
 import { useTheme } from "styled-components";
 
-
-const Button = styled.button`
+const StyledText = styled.div`
   font-weight: 600;
-  background-color: transparent;
-  border: none;
-  color: ${({ theme }) => theme.text};
-  cursor: pointer;
+  padding-left: 5px;
 `;
 
-const Container = styled.div`
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  transition: 0.2s;
+  color: ${({ theme }) => theme.text};
+  &:hover {
+    transform: scale(1.1);
+  }
 
   ion-icon {
     width: 13px;
+    
   }
 `;
 
-const DarkMode = ({themeToggler}) => {
-  const theme = useTheme()
+const DarkMode = ({ themeToggler }) => {
+  const theme = useTheme();
   return (
-    
-    <Container>
+    <Button onClick={themeToggler}>
       <ion-icon name={theme.moon}></ion-icon>
-      <Button onClick={themeToggler}>Dark Mode</Button>
-      
-    </Container>
+      <StyledText >Dark Mode</StyledText>
+    </Button>
   );
 };
 

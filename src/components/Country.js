@@ -5,10 +5,20 @@ const CountryBox = styled.div`
   margin-bottom: 60px;
   background-color: ${({ theme }) => theme.elements};
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
-  margin-right: 20px;
+  width: 250px;
+  transition: 200ms;
+  border-radius: 5px;
   img {
     width: 250px;
     height: 150px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+  @media only screen and (max-width: 736px) {
+    margin-bottom: 40px;
   }
 `;
 
@@ -23,13 +33,13 @@ const StyledTextBox = styled.div`
     font-weight: 300;
   }
 
-  h4{
+  h4 {
     margin: 14px 0;
+    max-width: 200px;
   }
 `;
 const Country = ({ country }) => {
   const { name, population, region, capital, flags } = country;
-  console.log(country);
   return (
     <CountryBox>
       <img src={flags.png} alt="" />

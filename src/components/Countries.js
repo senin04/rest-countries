@@ -1,44 +1,71 @@
 import React, { useEffect, useState } from "react";
 import Country from "./Country";
 import styled from "styled-components";
+import LoadingSpinner from "./LoadingSpinner";
+import useFetch from "../hooks/useFetch";
 
 const StyledCountries = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  column-gap: 20px;
   justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
+  background-color: ${({ theme }) => theme.background};
+
+  @media only screen and (max-width: 736px) {
+    margin: 0 auto;
+  }
 `;
 
-const StyledContainer = styled.div`
+const Error = styled.div`
+  color: red;
+  font-size: 30px;
+  font-weight: 800;
   display: flex;
   justify-content: center;
 `;
-const Countries = () => {
-  const url = "https://restcountries.com/v3.1/all";
+
+const Countries = ({ userInput, activeRegion }) => {
+  const { data, errorMessage, isLoading } = useFetch(
+    "https://restcountries.com/v3.1/all?fields=name,nativeName,population,region,subregion,capital,topLevelDomain,currencies,languages,borders,flags"
+  );
+
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
+    if (data.length > 0) {
+      if (activeRegion !== "all") {
+        const filtered = data.filter((country) => {
+          return country.region.toLowerCase() === activeRegion;
+        });
+        setCountries(filtered);
+      } else {
         setCountries(data);
-      })
-      .catch((err) => {
-        console.log("Error loading data");
-      });
-  }, []);
-
-  // console.log(countries[1])
-
+      }
+    }
+  }, [data, activeRegion]);
   return (
-    <StyledContainer>
-      <StyledCountries>
-        {countries.map((country, index) => {
-          return <Country key={index} country={country} />;
-        })}
-      </StyledCountries>
-    </StyledContainer>
+    <>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <StyledCountries>
+          {userInput !== "Search for a country..."
+            ? countries
+                .filter((country) =>
+                  country.name.common
+                    .toLowerCase()
+                    .includes(userInput.toLowerCase())
+                )
+                .map((filteredCountry, index) => (
+                  <Country key={index} country={filteredCountry} />
+                ))
+            : countries.map((country, index) => (
+                <Country key={index} country={country} />
+              ))}
+        </StyledCountries>
+      )}
+      {errorMessage && <Error>{errorMessage}</Error>}
+    </>
   );
 };
 

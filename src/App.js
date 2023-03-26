@@ -10,6 +10,7 @@ import { useState } from "react";
 const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.text};
+  min-height: 100vh;
 `;
 
 function App() {

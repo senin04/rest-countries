@@ -1,11 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { ShadowBox } from "./SearchBox";
+import RegionMenu from "./RegionMenu";
+
+const Container = styled.div`
+  width: 190px;
+`;
+
+const ShadowBox = styled.div`
+  background-color: ${({ theme }) => theme.elements};
+  padding: 12px 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+`;
 
 const Text = styled.div`
   font-size: 14px;
-  text-align: center;
-  margin-right: 40px;
 `;
 
 const Arrow = styled.button`
@@ -19,14 +31,17 @@ const Arrow = styled.button`
   }
 `;
 
-const FilterBox = () => {
+const FilterBox = ({onChangeRegion}) => {
   return (
-    <ShadowBox>
-      <Text>Filter by Region</Text>
-      <Arrow>
-        <ion-icon name="chevron-up"></ion-icon>
-      </Arrow>
-    </ShadowBox>
+    <Container>
+      <ShadowBox>
+        <Text>Filter by Region</Text>
+        <Arrow>
+          <ion-icon name="chevron-up"></ion-icon>
+        </Arrow>
+      </ShadowBox>
+      <RegionMenu onChangeRegion={onChangeRegion}/>
+    </Container>
   );
 };
 

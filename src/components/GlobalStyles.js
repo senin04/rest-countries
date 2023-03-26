@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+  html {
+  overflow-y: scroll;
+}
+
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};

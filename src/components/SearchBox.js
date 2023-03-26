@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
 
 export const ShadowBox = styled.div`
   background-color: ${({ theme }) => theme.elements};
@@ -8,15 +7,16 @@ export const ShadowBox = styled.div`
   border-radius: 5px;
   display: flex;
   align-items: center;
+  flex-basis: 400px;
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
 `;
 
-export const SearchButton = styled.button`
+export const SearchButton = styled.div`
   background-color: ${({ theme }) => theme.elements};
   border: none;
   color: ${({ theme }) => theme.text};
-  cursor: pointer;
   margin-right: 15px;
+  display: flex;
 
   ion-icon {
     font-size: 18px;
@@ -28,21 +28,25 @@ const TextInput = styled.input`
   border: none;
   text-decoration: none;
   outline: none;
-  width: 400px;
+  color: ${({ theme }) => theme.text};
+  width: 100%;
 
   ::placeholder {
     color: ${({ theme }) => theme.text};
   }
 `;
 
-const SearchBox = () => {
-  const [userInput, setUserInput] = useState("Search for a country...");
+const SearchBox = ({ userInput, onChangeInput }) => {
   return (
     <ShadowBox>
-      <SearchButton type="submit">
+      <SearchButton>
         <ion-icon name="search"></ion-icon>
       </SearchButton>
-      <TextInput type="text" placeholder={userInput}></TextInput>
+        <TextInput
+          type="text"
+          onChange={(e) => onChangeInput(e.target.value)}
+          placeholder={userInput}
+        ></TextInput>
     </ShadowBox>
   );
 };
