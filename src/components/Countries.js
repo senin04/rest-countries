@@ -54,10 +54,7 @@ const Countries = ({ userInput, activeRegion, data }) => {
                 </StyledLink>
               ))
           : countries.map((country, index) => (
-              <StyledLink
-                key={index}
-                to={`/AllCountries/${country.cca3}`}
-              >
+              <StyledLink key={index} to={`/AllCountries/${country.cca3}`}>
                 <Country country={country} />
               </StyledLink>
             ))}

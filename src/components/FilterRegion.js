@@ -11,16 +11,16 @@ const Container = styled.div`
 const FilterRegion = ({ onChangeRegion }) => {
   const ref = useRef();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false);
   useOnClickOutside(ref, () => {
-    setOpenMenu(false)
+    setOpenMenu(false);
     setTimeout(() => {
       setModalOpen(false);
-    }, 200); 
+    }, 200);
   });
 
   const handleOpenModal = () => {
-    setOpenMenu(true)
+    setOpenMenu(true);
     setModalOpen(true);
   };
 

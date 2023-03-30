@@ -10,7 +10,6 @@ const ShadowBox = styled.div`
   align-items: center;
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  
 `;
 
 const Text = styled.div`
@@ -26,7 +25,7 @@ const Arrow = styled.button`
   ion-icon {
     color: ${({ theme }) => theme.text};
     transform: ${({ isModalOpen }) =>
-      isModalOpen ? "rotate(180deg) !important"  : "rotate(0)"};
+      isModalOpen ? "rotate(180deg) !important" : "rotate(0)"};
   }
 `;
 

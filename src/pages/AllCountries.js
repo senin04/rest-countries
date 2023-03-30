@@ -25,7 +25,7 @@ const StyledTopContainer = styled.div`
   row-gap: 40px;
 `;
 
-const AllCountries = ({data}) => {
+const AllCountries = ({ data }) => {
   const [userInput, setUserInput] = useState("Search for a country...");
   const [activeRegion, setActiveRegion] = useState("all");
 
@@ -47,7 +47,11 @@ const AllCountries = ({data}) => {
         <SearchBox onChangeInput={handleChangeInput} userInput={userInput} />
         <FilterBox onChangeRegion={handleChangeRegion} />
       </StyledTopContainer>
-      <Countries data={data} userInput={userInput} activeRegion={activeRegion} />
+      <Countries
+        data={data}
+        userInput={userInput}
+        activeRegion={activeRegion}
+      />
     </>
   );
 };

@@ -32,7 +32,7 @@ const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.text};
 `;
 
-const BorderCountries = ({ borders}) => {
+const BorderCountries = ({ borders }) => {
   return (
     <Container>
       <div>Border Countries: </div>

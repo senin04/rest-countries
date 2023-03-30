@@ -13,7 +13,7 @@ const ShadowBox = styled.button`
   cursor: pointer;
   color: ${({ theme }) => theme.text};
   border: none;
-  
+
   font-size: 14px;
 `;
 

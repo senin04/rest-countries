@@ -23,7 +23,6 @@ const Button = styled.button`
 
   ion-icon {
     width: 13px;
-    
   }
 `;
 
@@ -32,7 +31,7 @@ const DarkMode = ({ themeToggler }) => {
   return (
     <Button onClick={themeToggler}>
       <ion-icon name={theme.moon}></ion-icon>
-      <StyledText >Dark Mode</StyledText>
+      <StyledText>Dark Mode</StyledText>
     </Button>
   );
 };

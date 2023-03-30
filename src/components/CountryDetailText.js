@@ -13,8 +13,6 @@ const Container = styled.div`
     margin-left: 0;
   }
 
- 
-
   h2 {
     margin-top: 0;
   }
@@ -34,7 +32,7 @@ const Informations = styled.div`
     height: auto;
 
     .marginer {
-        margin-top: 40px;
+      margin-top: 40px;
     }
   }
 
@@ -83,7 +81,7 @@ const CountryDetailText = ({ country }) => {
             {capital}
           </div>
           <div className="marginer">
-            <span >Top Level Domain: </span>
+            <span>Top Level Domain: </span>
             {Object.values(tld).join(" ")}
           </div>
           <div>

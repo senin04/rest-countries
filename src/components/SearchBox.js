@@ -42,11 +42,11 @@ const SearchBox = ({ userInput, onChangeInput }) => {
       <SearchButton>
         <ion-icon name="search"></ion-icon>
       </SearchButton>
-        <TextInput
-          type="text"
-          onChange={(e) => onChangeInput(e.target.value)}
-          placeholder={userInput}
-        ></TextInput>
+      <TextInput
+        type="text"
+        onChange={(e) => onChangeInput(e.target.value)}
+        placeholder={userInput}
+      ></TextInput>
     </ShadowBox>
   );
 };
