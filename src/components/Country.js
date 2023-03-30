@@ -8,10 +8,12 @@ const CountryBox = styled.div`
   width: 250px;
   transition: 200ms;
   border-radius: 5px;
+  cursor: pointer;
   img {
     width: 250px;
     height: 150px;
     border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
   }
 
   &:hover {

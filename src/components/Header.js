@@ -13,11 +13,10 @@ const Container = styled.header`
 `;
 
 const SecondContainer = styled.div`
-max-width: 1200px;
-margin: 0 auto;
-display: flex;
-justify-content: space-between;
-
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Header = ({ themeToggler }) => {

@@ -1,10 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import RegionMenu from "./RegionMenu";
-
-const Container = styled.div`
-  width: 190px;
-`;
 
 const ShadowBox = styled.div`
   background-color: ${({ theme }) => theme.elements};
@@ -14,6 +9,8 @@ const ShadowBox = styled.div`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  
 `;
 
 const Text = styled.div`
@@ -28,21 +25,20 @@ const Arrow = styled.button`
 
   ion-icon {
     color: ${({ theme }) => theme.text};
+    transform: ${({ isModalOpen }) =>
+      isModalOpen ? "rotate(180deg) !important"  : "rotate(0)"};
   }
 `;
 
-const FilterBox = ({onChangeRegion}) => {
+const FilterButton = ({ isModalOpen, onOpenModal }) => {
   return (
-    <Container>
-      <ShadowBox>
-        <Text>Filter by Region</Text>
-        <Arrow>
-          <ion-icon name="chevron-up"></ion-icon>
-        </Arrow>
-      </ShadowBox>
-      <RegionMenu onChangeRegion={onChangeRegion}/>
-    </Container>
+    <ShadowBox setT onClick={() => onOpenModal(true)}>
+      <Text>Filter by Region</Text>
+      <Arrow isModalOpen={isModalOpen}>
+        <ion-icon name={"chevron-up"}></ion-icon>
+      </Arrow>
+    </ShadowBox>
   );
 };
 
-export default FilterBox;
+export default FilterButton;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Country from "./Country";
 import styled from "styled-components";
-import LoadingSpinner from "./LoadingSpinner";
-import useFetch from "../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 const StyledCountries = styled.div`
   display: grid;
@@ -16,19 +15,12 @@ const StyledCountries = styled.div`
   }
 `;
 
-const Error = styled.div`
-  color: red;
-  font-size: 30px;
-  font-weight: 800;
-  display: flex;
-  justify-content: center;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.text};
 `;
 
-const Countries = ({ userInput, activeRegion }) => {
-  const { data, errorMessage, isLoading } = useFetch(
-    "https://restcountries.com/v3.1/all?fields=name,nativeName,population,region,subregion,capital,topLevelDomain,currencies,languages,borders,flags"
-  );
-
+const Countries = ({ userInput, activeRegion, data }) => {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -45,26 +37,31 @@ const Countries = ({ userInput, activeRegion }) => {
   }, [data, activeRegion]);
   return (
     <>
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <StyledCountries>
-          {userInput !== "Search for a country..."
-            ? countries
-                .filter((country) =>
-                  country.name.common
-                    .toLowerCase()
-                    .includes(userInput.toLowerCase())
-                )
-                .map((filteredCountry, index) => (
-                  <Country key={index} country={filteredCountry} />
-                ))
-            : countries.map((country, index) => (
-                <Country key={index} country={country} />
-              ))}
-        </StyledCountries>
-      )}
-      {errorMessage && <Error>{errorMessage}</Error>}
+      <StyledCountries>
+        {userInput !== "Search for a country..."
+          ? countries
+              .filter((country) =>
+                country.name.common
+                  .toLowerCase()
+                  .includes(userInput.toLowerCase())
+              )
+              .map((filteredCountry, index) => (
+                <StyledLink
+                  key={index}
+                  to={`/AllCountries/${filteredCountry.cca3}`}
+                >
+                  <Country country={filteredCountry} />
+                </StyledLink>
+              ))
+          : countries.map((country, index) => (
+              <StyledLink
+                key={index}
+                to={`/AllCountries/${country.cca3}`}
+              >
+                <Country country={country} />
+              </StyledLink>
+            ))}
+      </StyledCountries>
     </>
   );
 };

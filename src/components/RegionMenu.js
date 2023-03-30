@@ -1,5 +1,24 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slidein = keyframes`
+from {
+  transform: translatex(-100%);
+}
+
+to {
+  transform: translatey(0%);
+}
+`;
+const slideout = keyframes`
+from {
+  transform: translatey(0%);
+}
+
+to {
+  transform: translatex(200%);
+}
+`;
 
 const ShadowBox = styled.div`
   background-color: ${({ theme }) => theme.elements};
@@ -13,6 +32,11 @@ const ShadowBox = styled.div`
   position: absolute;
   z-index: 1;
   width: 150px;
+  animation: ${slidein} 0.2s linear;
+
+  /* &.closing {
+    animation: ${slideout} 0.2s linear;
+  } */
 `;
 
 const Region = styled.button`
@@ -28,11 +52,11 @@ const Region = styled.button`
   }
 `;
 
-const RegionMenu = ({ onChangeRegion }) => {
+const RegionMenu = React.forwardRef(({ onChangeRegion, openMenu }, ref) => {
   const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
   return (
-    <ShadowBox>
+    <ShadowBox className={openMenu ? "" : "closing"} ref={ref}>
       {regions.map((region) => (
         <Region key={region} onClick={onChangeRegion}>
           {region}
@@ -40,6 +64,6 @@ const RegionMenu = ({ onChangeRegion }) => {
       ))}
     </ShadowBox>
   );
-};
+});
 
 export default RegionMenu;
