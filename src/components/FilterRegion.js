@@ -8,15 +8,16 @@ const Container = styled.div`
   width: 190px;
 `;
 
-const FilterRegion = ({ onChangeRegion }) => {
+const FilterRegion = ({ onChangeRegion, activeRegion }) => {
   const ref = useRef();
   const [isModalOpen, setModalOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   useOnClickOutside(ref, () => {
-    setOpenMenu(false);
     setTimeout(() => {
-      setModalOpen(false);
-    }, 200);
+      setOpenMenu(false);
+    }, 400);
+
+    setModalOpen(false);
   });
 
   const handleOpenModal = () => {
@@ -26,23 +27,19 @@ const FilterRegion = ({ onChangeRegion }) => {
 
   return (
     <Container>
-      {isModalOpen ? (
+      <FilterButton
+        isModalOpen={isModalOpen}
+        onOpenModal={handleOpenModal}
+      ></FilterButton>
+      {isModalOpen && (
         <div>
-          <FilterButton
-            isModalOpen={isModalOpen}
-            onOpenModal={handleOpenModal}
-          ></FilterButton>
           <RegionMenu
+            activeRegion={activeRegion}
             openMenu={openMenu}
             ref={ref}
             onChangeRegion={onChangeRegion}
           />
         </div>
-      ) : (
-        <FilterButton
-          isModalOpen={isModalOpen}
-          onOpenModal={handleOpenModal}
-        ></FilterButton>
       )}
     </Container>
   );

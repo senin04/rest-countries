@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Country from "./Country";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -21,45 +21,32 @@ const StyledLink = styled(Link)`
 `;
 
 const Countries = ({ userInput, activeRegion, data }) => {
-  const [countries, setCountries] = useState([]);
-
-  useEffect(() => {
-    if (data.length > 0) {
-      if (activeRegion !== "all") {
-        const filtered = data.filter((country) => {
-          return country.region.toLowerCase() === activeRegion;
-        });
-        setCountries(filtered);
-      } else {
-        setCountries(data);
-      }
+  const filteredByRegion = data.filter((country) => {
+    if (activeRegion !== "all") {
+      return country.region.toLowerCase() === activeRegion;
+    } else {
+      return country;
     }
-  }, [data, activeRegion]);
+  });
+
+  const filteredBySearch = filteredByRegion.filter((country) => {
+    if (userInput !== "Search for a country...") {
+      return country.name.common
+        .toLowerCase()
+        .includes(userInput.toLowerCase());
+    } else {
+      return country;
+    }
+  });
+
   return (
-    <>
-      <StyledCountries>
-        {userInput !== "Search for a country..."
-          ? countries
-              .filter((country) =>
-                country.name.common
-                  .toLowerCase()
-                  .includes(userInput.toLowerCase())
-              )
-              .map((filteredCountry, index) => (
-                <StyledLink
-                  key={index}
-                  to={`/AllCountries/${filteredCountry.cca3}`}
-                >
-                  <Country country={filteredCountry} />
-                </StyledLink>
-              ))
-          : countries.map((country, index) => (
-              <StyledLink key={index} to={`/AllCountries/${country.cca3}`}>
-                <Country country={country} />
-              </StyledLink>
-            ))}
-      </StyledCountries>
-    </>
+    <StyledCountries>
+      {filteredBySearch.map((country, index) => (
+        <StyledLink key={index} to={`/AllCountries/${country.cca3}`}>
+          <Country country={country} />
+        </StyledLink>
+      ))}
+    </StyledCountries>
   );
 };
 

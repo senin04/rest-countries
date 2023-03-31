@@ -32,15 +32,24 @@ const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.text};
 `;
 
+const NoCountries = styled.div`
+  font-size: 14px;
+  font-weight: 300;
+`;
+
 const BorderCountries = ({ borders }) => {
   return (
     <Container>
       <div>Border Countries: </div>
-      {Object.values(borders).map((border) => (
-        <StyledLink key={border} to={`/AllCountries/${border}`}>
-          <ShadowBox>{border}</ShadowBox>
-        </StyledLink>
-      ))}
+      {Object.values(borders).length === 0 ? (
+        <NoCountries>Country has no border countries</NoCountries>
+      ) : (
+        Object.values(borders).map((border) => (
+          <StyledLink key={border} to={`/AllCountries/${border}`}>
+            <ShadowBox>{border}</ShadowBox>
+          </StyledLink>
+        ))
+      )}
     </Container>
   );
 };

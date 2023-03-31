@@ -37,20 +37,19 @@ const CountryDetail = styled.div`
 
 const CountryDetails = ({ data }) => {
   const { id } = useParams();
+  const country = data.find((country) => country.cca3 === id);
 
   return (
     <>
       <BackButton />
-      {data
-        .filter((country) => country.cca3 === id)
-        .map((filteredCountry, index) => {
-          return (
-            <CountryDetail key={index}>
-              <img src={filteredCountry.flags.png} alt="" />
-              <CountryDetailText country={filteredCountry} />
-            </CountryDetail>
-          );
-        })}
+      {country ? (
+        <CountryDetail>
+          <img src={country.flags.png} alt="" />
+          <CountryDetailText country={country} />
+        </CountryDetail>
+      ) : (
+        <div>Country not found!</div>
+      )}
     </>
   );
 };

@@ -14,6 +14,7 @@ const ShadowBox = styled.div`
 
 const Text = styled.div`
   font-size: 14px;
+  font-weight: 300;
 `;
 
 const Arrow = styled.button`
@@ -26,6 +27,7 @@ const Arrow = styled.button`
     color: ${({ theme }) => theme.text};
     transform: ${({ isModalOpen }) =>
       isModalOpen ? "rotate(180deg) !important" : "rotate(0)"};
+    transition: transform 0.25s;
   }
 `;
 
@@ -34,7 +36,7 @@ const FilterButton = ({ isModalOpen, onOpenModal }) => {
     <ShadowBox setT onClick={() => onOpenModal(true)}>
       <Text>Filter by Region</Text>
       <Arrow isModalOpen={isModalOpen}>
-        <ion-icon name={"chevron-up"}></ion-icon>
+        <ion-icon name={"chevron-down"}></ion-icon>
       </Arrow>
     </ShadowBox>
   );

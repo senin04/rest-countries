@@ -1,22 +1,22 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-const slidein = keyframes`
+const slideIn = keyframes`
 from {
-  transform: translatex(-100%);
+  transform: scaleY(0);
 }
 
 to {
-  transform: translatey(0%);
+  transform: scaleY(1);
 }
 `;
-const slideout = keyframes`
+const slideOut = keyframes`
 from {
-  transform: translatey(0%);
+  transform: scaleY(1);
 }
 
 to {
-  transform: translatex(200%);
+  transform: scaleY(0);
 }
 `;
 
@@ -32,38 +32,49 @@ const ShadowBox = styled.div`
   position: absolute;
   z-index: 1;
   width: 150px;
-  animation: ${slidein} 0.2s linear;
+  animation: ${slideIn} 0.2s linear;
+  transform-origin: top;
 
-  /* &.closing {
-    animation: ${slideout} 0.2s linear;
-  } */
+  &.closing {
+    animation: ${slideOut} 0.2s linear;
+  }
 `;
 
 const Region = styled.button`
   color: ${({ theme }) => theme.text};
   font-size: 14px;
+  font-weight: ${({ isActive }) => (isActive ? "bold" : "normal")};
   background-color: transparent;
   border: none;
   padding: 5px 0;
   cursor: pointer;
   transition: 0.1s;
+
   &:hover {
     transform: scale(1.1);
   }
 `;
 
-const RegionMenu = React.forwardRef(({ onChangeRegion, openMenu }, ref) => {
-  const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
+const RegionMenu = React.forwardRef(
+  ({ onChangeRegion, openMenu, activeRegion }, ref) => {
+    const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
-  return (
-    <ShadowBox className={openMenu ? "" : "closing"} ref={ref}>
-      {regions.map((region) => (
-        <Region key={region} onClick={onChangeRegion}>
-          {region}
-        </Region>
-      ))}
-    </ShadowBox>
-  );
-});
+    return (
+      <ShadowBox className={openMenu ? "opening" : "closing"} ref={ref}>
+        {regions.map((region) => {
+          return (
+            <Region
+              key={region}
+              onClick={() => onChangeRegion(region)}
+              isActive={region.toLocaleLowerCase() === activeRegion}
+            >
+              {region}
+            </Region>
+          );
+        })}
+      </ShadowBox>
+    );
+  }
+);
 
 export default RegionMenu;

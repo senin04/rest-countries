@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SearchBox from "../components/SearchBox";
 import styled from "styled-components";
-import FilterBox from "../components/FilterRegion";
+import FilterRegion from "../components/FilterRegion";
 import Countries from "../components/Countries";
 
 // const StyledContainer = styled.div`
@@ -26,26 +26,25 @@ const StyledTopContainer = styled.div`
 `;
 
 const AllCountries = ({ data }) => {
-  const [userInput, setUserInput] = useState("Search for a country...");
+  const [userInput, setUserInput] = useState("");
   const [activeRegion, setActiveRegion] = useState("all");
 
   const handleChangeInput = (value) => {
-    if (value === "") {
-      setUserInput("Search for a country...");
-    } else {
-      setUserInput(value);
-    }
+    setUserInput(value);
   };
 
   const handleChangeRegion = (e) => {
-    setActiveRegion(e.target.innerText.toLowerCase());
+    setActiveRegion(e.toLowerCase());
   };
 
   return (
     <>
       <StyledTopContainer>
         <SearchBox onChangeInput={handleChangeInput} userInput={userInput} />
-        <FilterBox onChangeRegion={handleChangeRegion} />
+        <FilterRegion
+          activeRegion={activeRegion}
+          onChangeRegion={handleChangeRegion}
+        />
       </StyledTopContainer>
       <Countries
         data={data}

@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `;
 
-const Informations = styled.div`
+const Information = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -59,7 +59,7 @@ const CountryDetailText = ({ country }) => {
     <Container>
       <div>
         <h2>{name.common}</h2>
-        <Informations>
+        <Information>
           <div>
             <span>Native Name: </span>
             {name.nativeName[lang[0]].official}
@@ -92,7 +92,7 @@ const CountryDetailText = ({ country }) => {
             <span>Languages: </span>
             {Object.keys(languages).join(", ")}
           </div>
-        </Informations>
+        </Information>
       </div>
 
       <BorderCountries borders={borders} name={name} />

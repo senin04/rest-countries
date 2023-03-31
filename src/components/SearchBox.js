@@ -30,6 +30,8 @@ const TextInput = styled.input`
   outline: none;
   color: ${({ theme }) => theme.text};
   width: 100%;
+  font-weight: 300;
+  font-size: 14px;
 
   ::placeholder {
     color: ${({ theme }) => theme.text};
@@ -44,8 +46,9 @@ const SearchBox = ({ userInput, onChangeInput }) => {
       </SearchButton>
       <TextInput
         type="text"
+        value={userInput}
         onChange={(e) => onChangeInput(e.target.value)}
-        placeholder={userInput}
+        placeholder="Search for a country..."
       ></TextInput>
     </ShadowBox>
   );

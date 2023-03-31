@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyles";
-import { lightTheme, darkTheme } from "./components/Themes";
-import { useState } from "react";
+import { lightTheme, darkTheme } from "./themes";
+import { useState, useEffect } from "react";
 import AllCountries from "./pages/AllCountries";
 import NoPage from "./pages/NoPage";
 import CountryDetail from "./pages/CountryDetails";
@@ -41,7 +41,8 @@ const Error = styled.div`
 //slide pri zatvorení šípky no way, nemám už potuchy
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const storedTheme = JSON.parse(localStorage.getItem("theme"));
+  const [theme, setTheme] = useState(storedTheme || "light");
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
@@ -50,13 +51,24 @@ function App() {
     "https://restcountries.com/v3.1/all?fields=name,population,region,subregion,capital,tld,currencies,languages,borders,flags,cca3"
   );
 
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(theme));
+  }, [theme]);
+
+  useEffect(() => {
+    const theme = JSON.parse(localStorage.getItem("theme"));
+    if (theme) {
+      setTheme(theme);
+    }
+  }, [theme]);
+
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
-          <GlobalStyles />
           <Container>
             <Header themeToggler={themeToggler} />
             <StyledContainer>
