@@ -33,7 +33,7 @@ const Arrow = styled.button`
 
 const FilterButton = ({ isModalOpen, onOpenModal }) => {
   return (
-    <ShadowBox setT onClick={() => onOpenModal(true)}>
+    <ShadowBox onClick={onOpenModal}>
       <Text>Filter by Region</Text>
       <Arrow isModalOpen={isModalOpen}>
         <ion-icon name={"chevron-down"}></ion-icon>

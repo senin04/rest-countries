@@ -32,11 +32,13 @@ const ShadowBox = styled.div`
   position: absolute;
   z-index: 1;
   width: 150px;
-  animation: ${slideIn} 0.2s linear;
+  animation: ${slideIn} 0.2s ease-in-out forwards;
   transform-origin: top;
 
+  transform: scaleY(0);
+
   &.closing {
-    animation: ${slideOut} 0.2s linear;
+    animation: ${slideOut} 0.2s ease-in-out forwards;
   }
 `;
 
@@ -55,26 +57,26 @@ const Region = styled.button`
   }
 `;
 
-const RegionMenu = React.forwardRef(
-  ({ onChangeRegion, openMenu, activeRegion }, ref) => {
-    const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
+const RegionMenu = ({ onChangeRegion, openMenu, activeRegion }) => {
+  const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 
-    return (
-      <ShadowBox className={openMenu ? "opening" : "closing"} ref={ref}>
-        {regions.map((region) => {
-          return (
-            <Region
-              key={region}
-              onClick={() => onChangeRegion(region)}
-              isActive={region.toLocaleLowerCase() === activeRegion}
-            >
-              {region}
-            </Region>
-          );
-        })}
-      </ShadowBox>
-    );
-  }
-);
+  return (
+    <ShadowBox
+    className={openMenu ? "" : "closing"}
+    >
+      {regions.map((region) => {
+        return (
+          <Region
+            key={region}
+            onClick={() => onChangeRegion(region)}
+            isActive={region.toLocaleLowerCase() === activeRegion}
+          >
+            {region}
+          </Region>
+        );
+      })}
+    </ShadowBox>
+  );
+};
 
 export default RegionMenu;
